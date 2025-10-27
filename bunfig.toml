@@ -1,2 +1,32 @@
 [install]
 linker = "isolated"
+
+# Set log level to error for less console overhead
+logLevel = "error"
+
+# Avoid smol mode for maximum performance
+smol = true
+
+# Enable telemetry if you want Bun to collect feature usage and timing data
+telemetry = true
+
+[define]
+# Example: Replace process.env.NODE_ENV with "production" at build time
+"process.env.NODE_ENV" = '"production"'
+
+[loader]
+# Example: Custom loader mapping if needed
+# ".bagel" = "tsx"
+
+[install]
+# Use default hoisted linker for speed (do not set linker = "isolated")
+# Ensure auto-install is enabled (default)
+auto = "auto"
+# Save binary lockfile for faster installs (default)
+saveTextLockfile = false
+# Do not use frozenLockfile unless you want strict lockfile consistency
+frozenLockfile = false
+# Do not use dryRun in production
+dryRun = false
+# Use exact version pinning only if you want deterministic installs
+exact = false

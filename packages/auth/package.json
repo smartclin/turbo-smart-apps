@@ -1,29 +1,37 @@
 {
-  "name": "@smart-apps/auth",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./src/*.ts"
-    }
-  },
-  "type": "module",
-  "scripts": {
-    "build": "tsdown"
-  },
-  "devDependencies": {
-    "tsdown": "catalog:"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "better-auth": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:",
-    "@smart-apps/db": "workspace:*"
-  }
+	"name": "@smart-apps/auth",
+	"exports": {
+		".": {
+			"types": "./dist/index.d.ts",
+			"default": "./src/index.ts"
+		},
+		"./*": {
+			"types": "./dist/*.d.ts",
+			"default": "./src/*.ts"
+		},
+		"./auth": "./src/auth.ts"
+	},
+	"type": "module",
+	"scripts": {
+		"check": "biome check --write .",
+		"auth:gen": "bunx @better-auth/cli generate --config src/auth.ts --output ../db/src/schema/auth.ts",
+		"build": "tsdown"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "catalog:",
+		"@types/node": "catalog:",
+		"tsdown": "catalog:"
+	},
+	"peerDependencies": {
+		"better-auth": "catalog:",
+		"server-only": "catalog:",
+		"typescript": "catalog:tool"
+	},
+	"dependencies": {
+		"@smart-apps/db": "workspace:*",
+		"@t3-oss/env-core": "^0.13.8",
+		"dotenv": "catalog:",
+		"drizzle-orm": "catalog:db",
+		"zod": "catalog:"
+	}
 }

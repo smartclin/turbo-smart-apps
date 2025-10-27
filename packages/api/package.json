@@ -1,33 +1,35 @@
 {
-  "name": "@smart-apps/api",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./src/index.ts"
-    },
-    "./*": {
-      "types": "./dist/*.d.ts",
-      "default": "./src/*.ts"
-    }
-  },
-  "type": "module",
-  "scripts": {
-    "build": "tsdown"
-  },
-  "devDependencies": {
-    "tsdown": "catalog:"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@trpc/server": "catalog:",
-    "@trpc/client": "catalog:",
-    "next": "catalog:",
-    "drizzle-orm": "catalog:",
-    "dotenv": "catalog:",
-    "zod": "catalog:",
-    "@smart-apps/auth": "workspace:*",
-    "@smart-apps/db": "workspace:*"
-  }
+	"dependencies": {
+		"@smart-apps/auth": "workspace:*",
+		"@smart-apps/db": "workspace:*",
+		"@trpc/client": "catalog:",
+		"@trpc/server": "catalog:",
+		"dotenv": "catalog:",
+		"drizzle-orm": "catalog:db",
+		"next": "catalog:",
+		"superjson": "^2.2.3",
+		"zod": "catalog:"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "catalog:",
+		"tsdown": "catalog:"
+	},
+	"exports": {
+		".": {
+			"default": "./src/index.ts",
+			"types": "./dist/index.d.ts"
+		},
+		"./*": {
+			"default": "./src/*.ts",
+			"types": "./dist/*.d.ts"
+		}
+	},
+	"name": "@smart-apps/api",
+	"peerDependencies": {
+		"typescript": "^5"
+	},
+	"scripts": {
+		"build": "tsdown"
+	},
+	"type": "module"
 }

@@ -1,0 +1,25 @@
+{
+  "name": "@yuki/{{ name }}",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "clean": "git clean -xdf .cache .turbo dist node_modules",
+    "dev": "tsc --watch",
+   "check": "biome check --write .",
+			"check-types": "turbo check-types"
+      },
+  "dependencies": {},
+  "devDependencies": {
+		"@biomejs/biome": "catalog:",
+    "typescript": "catalog:tool"
+  }
+}
