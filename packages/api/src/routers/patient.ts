@@ -126,20 +126,20 @@ export const patientRouter = router({
 	// Pediatric-specific procedures
 	getMedicalHistory: doctorProcedure
 		.input(z.object({ patientId: z.string().uuid() }))
-		.query(async ({ ctx, input }) => {
-			return ctx.db
+		.query(async ({ ctx, input }) =>
+			ctx.db
 				.select()
 				.from(medicalHistory)
 				.where(eq(medicalHistory.patientId, input.patientId))
-				.orderBy(desc(medicalHistory.diagnosisDate));
-		}),
+				.orderBy(desc(medicalHistory.diagnosisDate))
+		),
 
-	getAllergies: doctorProcedure.input(z.object({ patientId: z.string().uuid() })).query(async ({ ctx, input }) => {
-		return ctx.db
+	getAllergies: doctorProcedure.input(z.object({ patientId: z.string().uuid() })).query(async ({ ctx, input }) =>
+		ctx.db
 			.select()
 			.from(patientAllergies)
-			.where(and(eq(patientAllergies.patientId, input.patientId), eq(patientAllergies.isActive, true)));
-	}),
+			.where(and(eq(patientAllergies.patientId, input.patientId), eq(patientAllergies.isActive, true)))
+	),
 
 	// Pediatric growth tracking
 	getPediatricStats: doctorProcedure

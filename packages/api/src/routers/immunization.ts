@@ -121,13 +121,13 @@ export const immunizationRouter = router({
 	// Pediatric immunization-specific procedures
 	getVaccinationSchedule: doctorProcedure
 		.input(z.object({ patientId: z.string().uuid() }))
-		.query(async ({ ctx, input }) => {
-			return ctx.db
+		.query(async ({ ctx, input }) =>
+			ctx.db
 				.select()
 				.from(immunizations)
 				.where(eq(immunizations.patientId, input.patientId))
-				.orderBy(immunizations.administrationDate);
-		}),
+				.orderBy(immunizations.administrationDate)
+		),
 
 	getOverdueVaccinations: doctorProcedure
 		.input(z.object({ patientId: z.string().uuid().optional() }))

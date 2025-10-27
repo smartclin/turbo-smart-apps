@@ -8,7 +8,7 @@ import * as schema from "./schema";
 const client = postgres(process.env.DATABASE_URL as string, {
 	// Recommended configuration for a robust connection pool
 	max: 10,
-	idle_timeout: 30000
+	idle_timeout: 30_000
 });
 
 // 2. Initialize Drizzle with the client, schema, and casing

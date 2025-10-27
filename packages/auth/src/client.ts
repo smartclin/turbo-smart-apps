@@ -17,8 +17,8 @@ import { createAuthClient } from "better-auth/client";
 import { ac, allRoles } from "./permissions";
 
 // Infer the return type from the createAuthClient function directly
-export const getAuthClient = (): ReturnType<typeof createAuthClient> => {
-	return createAuthClient({
+export const getAuthClient = (): ReturnType<typeof createAuthClient> =>
+	createAuthClient({
 		baseURL: process.env.NEXT_PUBLIC_BASE_URL ?? "",
 		emailAndPassword: {
 			enabled: true
@@ -38,4 +38,3 @@ export const getAuthClient = (): ReturnType<typeof createAuthClient> => {
 			inferAdditionalFields()
 		]
 	});
-};

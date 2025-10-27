@@ -2,15 +2,15 @@
 import "better-auth";
 
 declare module "better-auth" {
-	interface BetterAuthUser {
+	type BetterAuthUser = {
 		role: "admin" | "doctor" | "nurse" | "member";
 		gender: "male" | "female";
 		banned?: boolean;
 		banReason?: string | null;
 		banExpires?: Date | null;
-	}
+	};
 
-	interface BetterAuthSession {
+	type BetterAuthSession = {
 		user: BetterAuthUser & {
 			id: string;
 			name: string;
@@ -20,5 +20,5 @@ declare module "better-auth" {
 			createdAt: Date;
 			updatedAt: Date;
 		};
-	}
+	};
 }

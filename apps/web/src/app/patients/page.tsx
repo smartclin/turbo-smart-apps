@@ -108,16 +108,7 @@ export default function PatientsPage() {
 										Loading...
 									</TableCell>
 								</TableRow>
-							) : !patientsData?.data?.length ? (
-								<TableRow>
-									<TableCell
-										className='py-4 text-center'
-										colSpan={7}
-									>
-										No patients found
-									</TableCell>
-								</TableRow>
-							) : (
+							) : patientsData?.data?.length ? (
 								patientsData.data.map(patient => (
 									<TableRow key={patient.id}>
 										<TableCell className='font-mono'>{patient.medicalRecordNumber}</TableCell>
@@ -157,6 +148,15 @@ export default function PatientsPage() {
 										</TableCell>
 									</TableRow>
 								))
+							) : (
+								<TableRow>
+									<TableCell
+										className='py-4 text-center'
+										colSpan={7}
+									>
+										No patients found
+									</TableCell>
+								</TableRow>
 							)}
 						</TableBody>
 					</Table>

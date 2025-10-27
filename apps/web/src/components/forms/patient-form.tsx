@@ -90,17 +90,17 @@ export const patientFormSchema = z.object({
 export type PatientFormData = z.infer<typeof patientFormSchema>;
 
 // 1. Props Fix (noExplicitAny on PatientFormProps)
-interface PatientFormProps {
+type PatientFormProps = {
 	patient: PatientFormData | null;
 	onSubmit: (data: PatientFormData) => void;
 	isLoading: boolean;
 	onSuccess?: () => void; // ✅ Add this line
-}
+};
 
 // Helper type for managing local form errors
-interface FormErrors {
+type FormErrors = {
 	[key: string]: string | undefined;
-}
+};
 
 const initialState: PatientFormData = {
 	firstName: "",

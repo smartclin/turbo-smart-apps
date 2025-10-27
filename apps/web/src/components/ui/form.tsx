@@ -30,13 +30,11 @@ const FormField = <
 	TName extends FieldPath<TFieldValues> = FieldPath<TFieldValues>
 >({
 	...props
-}: ControllerProps<TFieldValues, TName>) => {
-	return (
-		<FormFieldContext.Provider value={{ name: props.name }}>
-			<Controller {...props} />
-		</FormFieldContext.Provider>
-	);
-};
+}: ControllerProps<TFieldValues, TName>) => (
+	<FormFieldContext.Provider value={{ name: props.name }}>
+		<Controller {...props} />
+	</FormFieldContext.Provider>
+);
 
 const useFormField = () => {
 	const fieldContext = React.useContext(FormFieldContext);
@@ -100,7 +98,7 @@ function FormControl({ ...props }: React.ComponentProps<typeof Slot>) {
 
 	return (
 		<Slot
-			aria-describedby={!error ? `${formDescriptionId}` : `${formDescriptionId} ${formMessageId}`}
+			aria-describedby={error ? `${formDescriptionId} ${formMessageId}` : `${formDescriptionId}`}
 			aria-invalid={!!error}
 			data-slot='form-control'
 			id={formItemId}

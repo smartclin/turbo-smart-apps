@@ -95,9 +95,11 @@ export const budgetRouter = router({
 		return budget;
 	}),
 
-	getByFiscalYear: protectedProcedure.input(z.object({ fiscalYear: z.number() })).query(async ({ ctx, input }) => {
-		return ctx.db.select().from(budgets).where(eq(budgets.fiscalYear, input.fiscalYear)).orderBy(budgets.category);
-	}),
+	getByFiscalYear: protectedProcedure
+		.input(z.object({ fiscalYear: z.number() }))
+		.query(async ({ ctx, input }) =>
+			ctx.db.select().from(budgets).where(eq(budgets.fiscalYear, input.fiscalYear)).orderBy(budgets.category)
+		),
 
 	getBudgetUtilization: adminProcedure.input(z.object({ fiscalYear: z.number() })).query(async ({ ctx, input }) => {
 		const budgetData = await ctx.db.select().from(budgets).where(eq(budgets.fiscalYear, input.fiscalYear));

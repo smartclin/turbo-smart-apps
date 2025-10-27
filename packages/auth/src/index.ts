@@ -10,12 +10,12 @@ import { restrictedUsernames } from "./usernames";
 
 const restrictedUsernamesSet = new Set(restrictedUsernames);
 
-interface InitAuthOptions {
+type InitAuthOptions = {
 	baseDomain: string;
 	baseUrl: string;
 	secret: string;
 	trustedOrigins?: string[];
-}
+};
 
 export function initAuth(options: InitAuthOptions) {
 	const config: BetterAuthOptions = {

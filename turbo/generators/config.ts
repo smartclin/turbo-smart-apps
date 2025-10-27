@@ -2,13 +2,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 // Define a clear interface for the JSON you expect
-interface PackageJSON {
+type PackageJSON = {
 	name: string;
 	version?: string;
 	dependencies?: Record<string, string>;
 	devDependencies?: Record<string, string>;
 	[key: string]: unknown;
-}
+};
 
 // Safely read JSON with type guard
 function readJSON<T = unknown>(filePath: string): T {
