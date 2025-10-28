@@ -2,9 +2,12 @@
 
 import { initAuth } from "./index";
 
-export const auth = initAuth({
-	baseDomain: "localhost",
-	baseUrl: "http://localhost:3000",
-	secret: "secret",
-	trustedOrigins: ["http://localhost:3000"]
-});
+export const auth = initAuth(
+	{},
+	{
+		baseDomain: "localhost",
+		baseUrl: "http://localhost:3000",
+		secret: process.env.BETTER_AUTH_SECRET as string,
+		trustedOrigins: ["http://localhost:3000"]
+	}
+);

@@ -9,6 +9,9 @@ import { clinicalNotes, immunizations, medicalHistory, medicalRecords, patientAl
 export const clinics = pgTable("clinics", {
 	id: uuid("id").defaultRandom().primaryKey(),
 	name: text("name").notNull(),
+	address: text("address"),
+	phone: text("phone"),
+	email: text("email"),
 	createdAt: timestamp("created_at").defaultNow(),
 	updatedAt: timestamp("updated_at").defaultNow()
 });
@@ -31,16 +34,22 @@ export const doctors = pgTable("doctors", {
 	updatedAt: timestamp("updated_at").defaultNow()
 });
 
-export const usersToClinics = pgTable("users_to_clinics", {
-	userId: text("user_id")
-		.notNull()
-		.references(() => user.id, { onDelete: "cascade" }),
-	clinicId: uuid("clinic_id")
-		.notNull()
-		.references(() => clinics.id, { onDelete: "cascade" }),
-	createdAt: timestamp("created_at").defaultNow().notNull(),
-	updatedAt: timestamp("updated_at").defaultNow().notNull()
-});
+export const usersToClinics = pgTable(
+	"users_to_clinics",
+	{
+		id: uuid("id").defaultRandom().primaryKey(),
+		userId: text("user_id")
+			.notNull()
+			.references(() => user.id, { onDelete: "cascade" }),
+		clinicId: uuid("clinic_id")
+			.notNull()
+			.references(() => clinics.id, { onDelete: "cascade" }),
+		role: text("role").default("staff"), // admin, doctor, nurse, staff
+		createdAt: timestamp("created_at").defaultNow().notNull(),
+		updatedAt: timestamp("updated_at").defaultNow().notNull()
+	},
+	table => [sql`UNIQUE (${table.userId}, ${table.clinicId})`]
+);
 
 // --- PATIENTS TABLE (FIXED) ---
 export const patients = pgTable(
@@ -86,10 +95,14 @@ export const patients = pgTable(
 
 export const clinicsRelations = relations(clinics, ({ many }) => ({
 	doctors: many(doctors),
+	usersToClinics: many(usersToClinics),
 	patients: many(patients),
 	appointments: many(appointments),
-	usersToClinics: many(usersToClinics),
 	medicalRecords: many(medicalRecords)
+}));
+
+export const userRelations = relations(user, ({ many }) => ({
+	usersToClinics: many(usersToClinics)
 }));
 
 export const usersToClinicsRelations = relations(usersToClinics, ({ one }) => ({

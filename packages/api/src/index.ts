@@ -5,14 +5,6 @@ import { ZodError } from "zod";
 
 import type { Context } from "./context";
 
-type AuthUser = User & {
-	role: "admin" | "doctor" | "nurse" | "member";
-	gender: "male" | "female";
-	banned?: boolean;
-	banReason?: string | null;
-	banExpires?: Date | null;
-};
-
 export const t = initTRPC.context<Context>().create({
 	transformer: superjson,
 	errorFormatter({ shape, error }) {
@@ -30,7 +22,7 @@ export const router = t.router;
 export const publicProcedure = t.procedure;
 
 // Simple role validation helper
-const requireRole = (allowed: AuthUser["role"][]) =>
+const requireRole = (allowed: User["role"][]) =>
 	t.middleware(({ ctx, next }) => {
 		const user = ctx.user;
 

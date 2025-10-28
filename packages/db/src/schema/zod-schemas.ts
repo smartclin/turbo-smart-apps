@@ -1,6 +1,8 @@
+import type { InferInsertModel } from "drizzle-orm";
 import { createInsertSchema, createSelectSchema } from "drizzle-zod";
 import z from "zod/v4";
 
+import type { user } from "./auth";
 import { appointments, budgets, expenses } from "./clinic";
 import { bloodTypeEnum } from "./enum";
 import { clinicalNotes, immunizations, type medicalHistory, type patientAllergies } from "./records";
@@ -117,6 +119,9 @@ export const insertBudgetSchema = createInsertSchema(budgets, {
 
 export const selectBudgetSchema = createSelectSchema(budgets);
 export const updateBudgetSchema = insertBudgetSchema.partial();
+
+export type User = typeof user.$inferSelect;
+export type InsertUser = InferInsertModel<typeof user>;
 
 export type Patient = typeof patients.$inferSelect;
 export type NewPatient = typeof patients.$inferInsert;

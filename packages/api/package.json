@@ -4,6 +4,7 @@
     "@smart-apps/db": "workspace:*",
     "@trpc/client": "catalog:",
     "@trpc/server": "catalog:",
+    "bcryptjs": "^3.0.2",
     "dotenv": "catalog:",
     "drizzle-orm": "catalog:db",
     "next": "catalog:",
